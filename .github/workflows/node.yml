@@ -1,26 +1,26 @@
-name: MAZA Project CI
+name: NASA Project CI
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-jobs: 
+jobs:
   build:
-    env:  
+    env:
       CI: true
       MONGO_URL: mongodb://localhost/nasa
     strategy:
-      matrix: 
+      matrix:
         node-version: [14.x, 16.x]
         mongodb-version: ['4.4']
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js Version ${{ matrix.node-version }}
+      - name: Use Node.js version ${{ matrix.node-version }}
         uses: actions/setup-node@v2
-        with: 
+        with:
           node-version: ${{ matrix.node-version }}
-      - name: Use MongoDB Version ${{ matrix.mongodb-version }} from Github actions 
+      - name: Use MongoDB from GitHub actions
         uses: supercharge/mongodb-github-action@1.6.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
